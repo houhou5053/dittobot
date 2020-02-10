@@ -14,5 +14,6 @@
     "dittobot"
   ],
   "author": "ditto7890",
-  "license": "UNLICENSED"
+  "license": "UNLICENSED",
+  "dependencies": {}
 }

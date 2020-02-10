@@ -4,7 +4,7 @@ const translate = require("@vitalets/google-translate-api");
 const { inspect } = require("util");
 
 module.exports = {
-    name: "dpqkf",
+    name: "eval",
     run: async (client, message, args) => {
         if (message.author.id !== "604617640891121664") return;
 

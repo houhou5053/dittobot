@@ -8,6 +8,7 @@ module.exports = {
         var url = 'https://www.naver.com/srchrank?frm=main'
 
         const embed = new Discord.RichEmbed()
+            .setAuthor('Naver', 'https://images-ext-2.discordapp.net/external/42ygoEiRXm11O1d1fr9HLm5qcr0avgCd7zquMYh-9jU/http/pluspng.com/img-png/naver-logo-png-naver-300.png')
             .setTitle('네이버 실시간 검색어')
             .setColor(0x00ff00)
             .setTimestamp()

@@ -71,11 +71,11 @@ module.exports = {
 
             // 순위 제목 - 아티스트명
             for (var i = 1; i < rank+1; i++) {
-                resp += `**${i}위** | **${title[i-1]}** - ${artist[i-1]}\n`;
+                resp += `**${i}위**. **${title[i-1]}** - ${artist[i-1]}\n`;
             }
 
             const embed = new Discord.RichEmbed()
-                .setAuthor('Melon')
+                .setAuthor('Melon', 'https://lh3.googleusercontent.com/GweSpOJ7p8RZ0lzMDr7sU0x5EtvbsAubkVjLY-chdyV6exnSUfl99Am0g8X0w_a2Qo4')
                 //멜론 차트 1위 ~ 10위
                 .setTitle(`멜론 차트 <1위 ~ ${rank}위>`)
                 .setDescription(resp)
