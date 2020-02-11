@@ -50,7 +50,7 @@ module.exports = {
                 embed.addField('상태', `**:white_square_button: 오프라인**`)
             }
 
-            embed.addField(`📥 서버에 들어온 날짜`, `**${joined}**`)
+            embed.addField('📥 서버에 들어온 날짜', `**${joined}**`)
             embed.addField('📥 디스코드 가입 날짜', `**${created}**`)
             embed.setTimestamp()
 
