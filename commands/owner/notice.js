@@ -44,7 +44,7 @@ module.exports = {
         client.guilds.forEach(guild => {
             let gc
             guild.channels.forEach(channel => {
-                if (channel.name.includes("봇-공지") || channel.name.includes("봇_공지") || channel.name.includes("📢봇_공지") || channel.name.includes("📢봇-공지") || channel.name.includes("디토봇") || channel.name.includes("🌐ㅣ봇_실험")) {
+                if (channel.name.includes("봇-공지") || channel.name.includes("봇_공지") || channel.name.includes("디토봇") || channel.name.includes("🌐ㅣ봇_실험")) {
                     if (channel.type === "text") {
                         gc = channel.id
                     }

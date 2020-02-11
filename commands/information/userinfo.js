@@ -4,13 +4,6 @@ const { stripIndents } = require("common-tags");
 const moment = require('moment-timezone');
 moment.locale('ko-KR');
 
-const mongoose = require("mongoose");
-mongoose.connect('mongodb://localhost:27017/dittobot', {
-	useNewUrlParser: true,
-	useUnifiedTopology: true
-});
-const Money = require("../mongoDB/mongodb.js");
-
 module.exports = {
     name: "내정보",
     aliases: ["정보", "userinfo", "user-info", "user-information", "user", "info-user", "user_info"],
@@ -76,19 +69,8 @@ module.exports = {
             .setDescription(`**${roles}**`)
             .setColor(member.displayHexColor === "#000000" ? "#FFFFFF" : member.displayHexColor)
 
-        Money.findOne({
-            userID: member.user.id,
-        }, (err, money) => {
-            if (err) console.log(err);
 
-            if (!money) {
-                embed.addField(`${client.emojis.find(x => x.name == "dittobot")} 디토봇 가입`, '**❎ 가입이 되어 있지 않습니다.**')
-            } else {
-                embed.addField(`${client.emojis.find(x => x.name == "dittobot")} 디토봇 가입`, '**✅ 가입이 되어 있습니다.**')
-            }
-
-            message.channel.send(embed);
-            message.channel.send(embed2);
-        });
+        message.channel.send(embed);
+        message.channel.send(embed2);
     }
 }

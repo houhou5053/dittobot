@@ -1,5 +1,5 @@
 module.exports = {
-    name: "uptim",
+    name: "uptime",
     aliases: ["업타임"],
     run: async (client, message, args) => {
         function duration(ms) {
