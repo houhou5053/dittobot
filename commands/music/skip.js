@@ -10,9 +10,9 @@ module.exports = {
 
         if (message.member.voiceChannel !== message.guild.me.voiceChannel) return message.channel.send('저랑 같은 음성 채널에 있으셔야 해요!');
 
-        /*let userCount = message.member.voiceChannel.members.size;
+        let userCount = message.member.voiceChannel.members.filter(u => u.user - u.user.bot).size
 
-        let required = Math.ceil(userCount/2)
+        let required = Math.ceil(userCount)
 
         if (!fetched.queue[0].voteSkips) fetched.queue[0].voteSkips = []
 
@@ -31,9 +31,9 @@ module.exports = {
                 .setThumbnail(`https://img.youtube.com/vi/${fetched.queue[0].thumbnail}/default.jpg`)
             message.channel.send(embed);
 
-            return fetched.dispatcher.emit('finish')
+           fetched.dispatcher.emit('finish')
+        } else {
+            message.channel.send(`**스킵한다**에 투표가 추가 되었어요! **${fetched.queue[0].voteSkips.length}/${required}**`)
         }
-
-        message.channel.send(`**스킵한다**에 투표가 추가 되었어요! **${fetched.queue[0].voteSkips.length}/${required}**`)*/
     }
 }

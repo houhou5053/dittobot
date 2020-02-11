@@ -1,9 +1,7 @@
 const Discord = require('discord.js');
 const { config } = require("dotenv");
-const client = new Discord.Client({
-    disableEveryone: true
-});
-const prefix = '디토야 ';
+const client = new Discord.Client({ disableEveryone: true });
+const prefix = '디토야 '
 const realprefix = '디토야';
 const ownerID = '604617640891121664';
 const active = new Map();
@@ -11,21 +9,14 @@ const active = new Map();
 client.commands = new Discord.Collection();
 client.aliases = new Discord.Collection();
 
-config({
-    path: __dirname + "/.env"
-});
+config({ path: __dirname + "/.env" });
 
 ["command"].forEach(handler => {
     require(`./handler/${handler}`) (client);
 });
 
 client.once("ready", () => {
-    console.log(`NAME: ${client.user.username}`)
-    console.log(`ID: ${client.user.id}`)
-    console.log(`${client.users.size}명이 봇을 사용하는 중`)
-    console.log(`${client.channels.size}개의 채팅 채널에 접속 중`)
-	console.log(`${client.guilds.size}개의 서버와 함께하는 중`)
-	console.log('--------------------------------');
+	console.log(`Login ${client.user.username}\n----------------------------`)
 
 	const botgame = [ `${client.guilds.size}개의 서버 | ${client.users.size}명의 유저 | ${client.channels.size}개의 채팅 채널과 함께하고 있어요!`, `'디토야 도움' 입력`, `이 메세지는 10초마다 랜덤으로 바뀌어요!` ]
 
@@ -35,13 +26,9 @@ client.once("ready", () => {
 	}, 10000)
 });
 
-client.on('error', error => {
-	console.error('The websocket connection encountered an error:', error);
-});
-
-process.on('unhandledRejection', error => {
-	console.error('Unhandled promise rejection:', error);
-});
+client.on('error', error => console.error('websocket 연결에 오류가 발생:', error));
+client.on('warn', warn => console.warn('경고:', warn));
+process.on('unhandledRejection', error => console.error('Unhandled promise rejection:', error));
 
 client.on("message", async message => {
 	if (message.author.bot) return;

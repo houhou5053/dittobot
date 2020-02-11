@@ -12,7 +12,10 @@ module.exports = {
         search(args.join(" "), function (err, res) {
             if (err) return message.channel.send(`에러... ${err}`);
 
-            let videos = res.videos.slice(0, 5);
+            var a = 0
+            var b = 1
+
+            let videos = res.videos.slice(a, b);
 
             const embed = new Discord.RichEmbed()
                 .setTitle(`"${args.join(" ")}" 검색 결과`)
