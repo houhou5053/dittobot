@@ -20,10 +20,6 @@ module.exports = {
         return target;
     },
 
-    formatDate: function(date) {
-        return new Intl.DateTimeFormat('ko-KR').format(date);
-    },
-
     promptMessage: async function(message, author, time, vaildReactions) {
         time *= 1000;
 
