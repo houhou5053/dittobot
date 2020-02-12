@@ -38,15 +38,15 @@ module.exports = {
                 request(url2, function(error, dd, html) {
                     if (!error) {
                         var d = JSON.parse(html, null, 1).features[0].attributes.value
-                        request(url3, function(error, de, html) {
+                        request(url3, function(error, dd, html) {
                             if (!error) {
                                 var e = JSON.parse(html, null, 1).features[0].attributes.value
-                                request(url4, function(error, dada, html) {
+                                request(url4, function(error, dd, html) {
                                     if (!error) {
                                         var f = JSON.parse(html, null, 1).features[0].attributes.value
 
                                         embed.setDescription(`**국내**\n확진: **${a}**\n퇴원: **${b}**\n검사 진행: **${c}**\n\n**전세계**\n감염자: **${d}명**\n사망자: **${e}명**\n완치: **${f}명**`)
-                                        embed.addField('출처/참고', `[질병관리본부](http://ncov.mohw.go.kr/index_main.jsp)\n[존스홉킨스대학](https://gisanddata.maps.arcgis.com/apps/opsdashboard/index.html#/bda7594740fd40299423467b48e9ecf6)`)
+                                        embed.addField('참고', `[질병관리본부](http://ncov.mohw.go.kr/index_main.jsp)\n[존스홉킨스대학](https://gisanddata.maps.arcgis.com/apps/opsdashboard/index.html#/bda7594740fd40299423467b48e9ecf6)`)
 
                                         message.channel.send(embed)
                                     }

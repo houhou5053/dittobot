@@ -11,9 +11,7 @@ client.aliases = new Discord.Collection();
 
 config({ path: __dirname + "/.env" });
 
-["command"].forEach(handler => {
-    require(`./handler/${handler}`) (client);
-});
+["command"].forEach(handler => {require(`./handler/${handler}`) (client)});
 
 client.once("ready", () => {
 	console.log(`Login ${client.user.username}\n----------------------------`)

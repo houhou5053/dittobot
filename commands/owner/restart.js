@@ -4,7 +4,7 @@ module.exports = {
     name: "재시작",
     aliases: ["restart"],
     run: async (client, message, args, ops) => {
-        if(message.author.id !== ops.ownerID) return message.reply('권한이 없습니다.');
+        if(message.author.id !== ops.ownerID) return message.reply('디토봇 제작자만 가능합니다!');
 
         try {
             message.react('👌')

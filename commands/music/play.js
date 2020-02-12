@@ -2,8 +2,8 @@ const ytdl = require("ytdl-core");
 const Discord = require("discord.js");
 
 module.exports = {
-    name: "플레이",
-    aliases: ["play", "재생", "p", "pl", "ㅔㅣ묘", "wotod", "vmffpdl"],
+    name: "play",
+    aliases: ["플레이", "재생", "p", "pl", "ㅔㅣ묘", "wotod", "vmffpdl"],
     run: async (client, message, args, ops) => {
         if (!message.member.voiceChannel) return message.channel.send('음성 채널에 들어가 주세요!')
 

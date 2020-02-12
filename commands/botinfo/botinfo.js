@@ -32,8 +32,6 @@ module.exports = {
             > ${client.emojis.find(x => x.name == "js")} Node.js 버전: **v13.5.0**
             > ${client.emojis.find(x => x.name == "discord_logo")} Discord.js 버전: **v11.5.1**`)
 
-            //https://dittobot.netlify.com
-
         m.edit(embed)
     }
 }

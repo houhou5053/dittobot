@@ -2,6 +2,7 @@ const shorten = require('isgd');
 
 module.exports = {
     name: "단축",
+    aliases: ["url단축", "urlshorten"],
     usage: "디토야 단축 <URL> <CustomName>",
     run: async (client, message, args, tools) => {
         if (!args[0]) return message.channel.send('**명령어 사용법**\n\`디토야 단축 <URL> [Custom Name]\`')
@@ -20,7 +21,7 @@ module.exports = {
 
                 if (res.startsWith('에러:')) return message.channel.send(`**${res}**`);
 
-                message.channel.send(`**<${res}>**`)
+                message.channel.send(`**${res}**`)
             })
         }
     }

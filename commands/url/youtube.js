@@ -1,14 +1,14 @@
 const Discord = require("discord.js");
 
 module.exports = {
-    name: "엔트리",
-    aliases: ["entry"],
+    name: "유튜브",
+    aliases: ["youtube"],
     run: async (client, message, args) => {
         const embed = new Discord.RichEmbed()
-            .setColor(0x00ffff)
-            .setAuthor('Entry', 'https://playentry.org//img/icons/favicon.ico')
+            .setColor(0xff0000)
             .setTitle('들어가기')
-            .setURL('https://playentry.org/')
+            .setAuthor('YouTube', 'https://s.ytimg.com/yts/img/favicon_32-vflOogEID.png')
+            .setURL('https://www.youtube.com/')
         message.channel.send(embed);
     }
 }

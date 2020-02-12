@@ -1,14 +1,14 @@
 const Discord = require("discord.js");
 
 module.exports = {
-    name: "엔트리",
-    aliases: ["entry"],
+    name: "야후",
+    aliases: ["yahoo", "ヤフ"],
     run: async (client, message, args) => {
         const embed = new Discord.RichEmbed()
-            .setColor(0x00ffff)
-            .setAuthor('Entry', 'https://playentry.org//img/icons/favicon.ico')
+            .setAuthor('Yahoo', 'https://s.yimg.com/rz/l/favicon.ico')
+            .setColor(0xff00ff)
             .setTitle('들어가기')
-            .setURL('https://playentry.org/')
+            .setURL('https://www.yahoo.com/')
         message.channel.send(embed);
     }
 }
