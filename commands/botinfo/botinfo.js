@@ -3,8 +3,8 @@ const moment = require('moment-timezone');
 moment.locale('ko-KR');
 
 module.exports = {
-    name: "봇정보",
-    aliases: ["봇 정보", "botinfo"],
+    name: "botinfo",
+    aliases: ["봇정보"],
     run: async (client, message, args) => {
         const created = moment(client.user.createdAt).format('YYYY년 MM월 DD일');
 

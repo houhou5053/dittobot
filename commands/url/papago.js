@@ -1,8 +1,8 @@
 const Discord = require("discord.js");
 
 module.exports = {
-    name: "파파고",
-    aliases: ["papago"],
+    name: "papago",
+    aliases: ["파파고"],
     run: async (client, message, args) => {
         const embed = new Discord.RichEmbed()
             .setColor(0x0000ff)

@@ -1,8 +1,8 @@
 const Discord = require("discord.js");
 
 module.exports = {
-    name: "초대",
-    aliases: ['초대링크', '초대 링크', 'invite'],
+    name: "invite",
+    aliases: ['초대링크', '초대 링크', '초대', '봇초대'],
     run: async (client, message, args) => {
         const embed = new Discord.RichEmbed()
             .setColor(0x00ffff)

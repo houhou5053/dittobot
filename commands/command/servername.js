@@ -1,8 +1,8 @@
 const Discord = require("discord.js");
 
 module.exports = {
-    name: "서버목록",
-    aliases: ["서버 목록"],
+    name: "servername",
+    aliases: ["서버 목록", "서버목록"],
     run: async (client, message, args) => {
         let str = ''
 

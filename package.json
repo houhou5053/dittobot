@@ -4,7 +4,7 @@
   "description": "discord bot",
   "main": ".",
   "scripts": {
-    "test": "index.js"
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
@@ -14,6 +14,5 @@
     "dittobot"
   ],
   "author": "ditto7890",
-  "license": "UNLICENSED",
-  "dependencies": {}
+  "license": "UNLICENSED"
 }

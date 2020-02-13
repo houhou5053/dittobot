@@ -2,9 +2,10 @@ const Discord = require("discord.js")
 const { stripIndents } = require("common-tags")
 
 module.exports = {
-    name: "커멘드",
-    aliases: ["커맨드", "command", "cmd", "명령어"],
+    name: "command",
+    aliases: ["커맨드", "커멘드", "cmd", "명령어"],
     usage: "[command | alias]",
+    category: "command",
     run: async (client, message, args) => {
         if (args[0]) {
             return getCMD(client, message, args[0])
@@ -42,7 +43,7 @@ function getCMD(client, message, input) {
     if (!cmd) return message.channel.send(embed.setColor(0xff0000).setDescription(info))
 
     if (cmd.name) info = `**명령어 이름**: ${cmd.name}`
-    if (cmd.aliases) info += `\n**별칭**: ${cmd.aliases.map(a => `\`${a}\``).join(", ")}`
+    if (cmd.aliases) info += `\n**aliases**: ${cmd.aliases.map(a => `\`${a}\``).join(", ")}`
     if (cmd.description) info += `\n**설명**: ${cmd.description}`
     if (cmd.usage) {
         info += `\n**사용**: ${cmd.usage}`

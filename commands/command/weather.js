@@ -2,8 +2,8 @@ const weather = require("weather-js")
 const Discord = require("discord.js")
 
 module.exports = {
-    name: "날씨",
-    aliases: ["weather"],
+    name: "weather",
+    aliases: ["날씨"],
     run: async (client, message, args) => {
         if (!args[0]) return message.channel.send('지역이나 우편 번호를 입력해 주세요!')
 

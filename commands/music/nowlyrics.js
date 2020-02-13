@@ -3,8 +3,8 @@ const lyrics = new Lyrics()
 const Discord = require('discord.js')
 
 module.exports = {
-    name: '지금 가사',
-    aliases: ['지금가사', 'nowlyric', 'nowlyrics'],
+    name: 'nowlyrics',
+    aliases: ['지금가사', 'nowlyric'],
     run: async (client, message, args, ops) => {
         let fetched = ops.active.get(message.guild.id);
 

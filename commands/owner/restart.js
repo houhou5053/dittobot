@@ -1,8 +1,9 @@
 const Discord = require('discord.js');
 
 module.exports = {
-    name: "재시작",
-    aliases: ["restart"],
+    name: "restart",
+    aliases: ["재시작"],
+    category: 'onwer',
     run: async (client, message, args, ops) => {
         if(message.author.id !== ops.ownerID) return message.reply('디토봇 제작자만 가능합니다!');
 

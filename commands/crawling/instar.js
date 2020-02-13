@@ -4,8 +4,9 @@ const { stripIndents } = require('common-tags');
 const fetch = require("node-fetch");
 
 module.exports = {
-    name: "인스타",
-    category: "play",
+    name: "instar",
+    aliases: ["인스타", "insta"],
+    category: "category",
     run: async (client, message, args) => {
         const name = args.join(" ");
 

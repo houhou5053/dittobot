@@ -4,8 +4,8 @@ const { promptMessage } = require("../../functions.js");
 const chooseArr = ["✌", "✊", "✋"];
 
 module.exports = {
-    name: "가위바위보",
-    aliases: ["가위 바위 보"],
+    name: "rps",
+    aliases: ["가위 바위 보", "가위바위보"],
     run: async (client, message, args) => {
         const embed = new Discord.RichEmbed()
             .setColor(0xfffffe)

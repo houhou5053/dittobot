@@ -4,6 +4,7 @@ const Discord = require("discord.js")
 module.exports = {
     name: "2b2t",
     aliases: ["2b2t 대기목록"],
+    category: "crawling",
     run: async (client, message, args) => {
         var url = 'https://rebane2001.com/queuepeek/data.json'
 

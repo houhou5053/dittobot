@@ -3,8 +3,9 @@ const request = require('request');
 const Discord = require('discord.js');
 
 module.exports = {
-    name: "멜론차트",
-    aliases: ["멜론 차트", "melonchart"],
+    name: "melonchart",
+    aliases: ["멜론 차트", "멜론차트"],
+    category: 'crawling',
     run: async (client, message, args) => {
         var url = 'http://www.melon.com/chart/';
         var title = new Array(),
@@ -12,7 +13,6 @@ module.exports = {
             up_date,
             up_time;
         var rank = 10;  //10위까지 확인
-        
         
         request(url, function(error, response, html){
         if (!error) {

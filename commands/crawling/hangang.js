@@ -2,8 +2,9 @@ const request = require("request")
 const Discord = require("discord.js")
 
 module.exports = {
-    name: "한강",
-    aliases: ["한강온도", "한강수온"],
+    name: "hangang",
+    aliases: ["한강온도", "한강수온", "한강"],
+    category: 'crawling',
     run: async (client, message, args) => {
         var url = 'http://hangang.dkserver.wo.tc/'
 

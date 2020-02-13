@@ -3,8 +3,8 @@ const moment = require('moment-timezone');
 moment.locale('ko-KR');
 
 module.exports = {
-    name: "서버 정보",
-    aliases: ["서버정보", "정보서버", "정보 서버", "서정", "serverinfo", "server-info"],
+    name: "serverinfo",
+    aliases: ["서버정보", "정보서버", "정보 서버", "서정", "server-info"],
     run: async (client, message, args) => {
         const embed = new Discord.RichEmbed()
             .setTitle(`${message.guild.name} 서버의 정보`)

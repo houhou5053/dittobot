@@ -2,7 +2,8 @@ const Discord = require("discord.js");
 const translate = require('@vitalets/google-translate-api');
 
 module.exports = {
-    name: "번역",
+    name: "translate",
+    aliases: ["번역"],
     run: async (client, message, args) => {
 		const embed = new Discord.RichEmbed()
 			.setTitle('Google 번역기')

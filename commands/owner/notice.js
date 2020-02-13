@@ -4,8 +4,9 @@ const Discord = require("discord.js");
 const choose = ["✅", "❎"];
 
 module.exports = {
-    name: "공지",
-    aliases: ["notice", "공지사항"],
+    name: "notice",
+    aliases: ["공지", "공지사항"],
+    category: 'owner',
     run: async (client, message, args, ops) => {
         if (message.author.id !== ops.ownerID) return message.reply('디토봇 제작자만 가능합니다!')
 

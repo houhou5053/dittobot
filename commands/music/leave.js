@@ -1,6 +1,6 @@
 module.exports = {
-    name: "나가",
-    aliases: ["leave", "lea", "l", "skrk"],
+    name: "leave",
+    aliases: ["나가", "lea", "l", "skrk"],
     run: async (client, message, args, ops) => {
         if (!message.member.voiceChannel) return message.channel.send('음성 채널에 들어가 주세요!')
 

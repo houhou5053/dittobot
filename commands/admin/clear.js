@@ -1,6 +1,6 @@
 module.exports = {
-    name: "삭제",
-    aliases: ["clear", "청소", "delete"],
+    name: "clear",
+    aliases: ["삭제", "청소", "delete", "칟ㅁㄱ", "ㅇ딛ㅅㄷ", "tkrwp", "cjdth"],
     run: async (client, message, args) => {
         
         if (message.deletable) {
@@ -28,9 +28,7 @@ module.exports = {
         }
     
         message.channel.bulkDelete(deleteAmount, true)
-            .then(deleted => message.channel.send(`메세지 \`${deleted.size}\`개를 삭제 했습니다!`)).then(m => m.delete(3800))
+            .then(deleted => message.channel.send(`메세지 \`${deleted.size}\`개를 삭제 했습니다!`)).then(deleted => console.log(`${message.author.username}님이 ${message.guild.name} 서버에 ${message.channel.name} 채널에서 ${deleted.size}개에 메세지를 삭제하셨습니다. | ID: ${message.author.id}`)).then(m => m.delete(5000))
             .catch(err => message.reply(`오류 발생... ${err}\nditto7890#8948 님에게 연락 주세요!`));
-
-        console.log(`${message.author.username}님이 ${message.guild.name} 서버에 ${message.channel.name} 채널에서 ${deleteAmount}개에 메세지를 삭제하셨습니다. | ID: ${message.author.id}`)
     }
 }

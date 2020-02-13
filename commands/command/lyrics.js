@@ -3,8 +3,8 @@ const lyrics = new Lyrics()
 const Discord = require('discord.js')
 
 module.exports = {
-    name: '가사',
-    aliases: ['가사검색', 'lyric', 'lyrics'],
+    name: 'lyrics',
+    aliases: ['가사검색', 'lyric', '가사'],
     run: async (client, message, args, tools) => {
 
         if (!args[0]) return message.reply('가사를 검색할 노래 이름을 입력해 주세요!').then(m => m.delete(5000));

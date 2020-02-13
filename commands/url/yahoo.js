@@ -1,8 +1,8 @@
 const Discord = require("discord.js");
 
 module.exports = {
-    name: "야후",
-    aliases: ["yahoo", "ヤフ"],
+    name: "yahoo",
+    aliases: ["야후", "ヤフ"],
     run: async (client, message, args) => {
         const embed = new Discord.RichEmbed()
             .setAuthor('Yahoo', 'https://s.yimg.com/rz/l/favicon.ico')

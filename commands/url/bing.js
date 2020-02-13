@@ -1,8 +1,8 @@
 const Discord = require("discord.js");
 
 module.exports = {
-    name: "빙",
-    aliases: ["bing"],
+    name: "bing",
+    aliases: ["빙"],
     run: async (client, message, args) => {
         const embed = new Discord.RichEmbed()
             .setAuthor('Bing', 'https://www.bing.com/sa/simg/bing_p_rr_teal_min.ico')

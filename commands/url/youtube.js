@@ -1,8 +1,8 @@
 const Discord = require("discord.js");
 
 module.exports = {
-    name: "유튜브",
-    aliases: ["youtube"],
+    name: "youtube",
+    aliases: ["유튜브"],
     run: async (client, message, args) => {
         const embed = new Discord.RichEmbed()
             .setColor(0xff0000)

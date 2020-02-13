@@ -3,8 +3,9 @@ const Discord = require("discord.js");
 const ping = require("minecraft-server-util")
 
 module.exports = {
-    name: "mincraftserver",
-    aliases: ["마크서버", "mcserver", "마인크래프트서버"],
+    name: "mcserver",
+    aliases: ["마크서버", "minecraftserver", "마인크래프트서버"],
+    category: 'crawling',
     run: async (client, message, args) => {
         if (!args[0]) return message.channel.send('서버 이름을 써 주세요!')
 

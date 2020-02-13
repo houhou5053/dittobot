@@ -1,8 +1,8 @@
 const Discord = require("discord.js");
 
 module.exports = {
-    name: "카카오",
-    aliases: ["kakao"],
+    name: "kakao",
+    aliases: ["카카오"],
     run: async (client, message, args) => {
         const embed = new Discord.RichEmbed()
             .setAuthor('Kakao', 'https://www.kakaocorp.com/resources/favicon.ico')

@@ -5,8 +5,8 @@ const moment = require('moment-timezone');
 moment.locale('ko-KR');
 
 module.exports = {
-    name: "내정보",
-    aliases: ["정보", "userinfo", "user-info", "user-information", "user", "info-user", "user_info"],
+    name: "userinfo",
+    aliases: ["정보", "내정보", "user-info", "user-information", "user", "info-user", "user_info"],
     usage: "[id, | mention]",
     run: async (client, message, args) => {
 

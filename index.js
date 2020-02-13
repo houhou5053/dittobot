@@ -32,15 +32,13 @@ client.on("message", async message => {
 	if (message.author.bot) return;
 	if (message.channel.type === "dm") return;
 
+	if (message.author.id !== ownerID) console.log(`${message.author.username}: ${message.content} | ${message.guild.name} | ${message.author.id}`)
+
 	const args = message.content.substring(prefix.length).split(" ")
 
 	if (message.content.startsWith(realprefix)) {
-		if (message.author.id !== ownerID) {
-			console.log(`${message.author.username}: ${message.content} | ID: ${message.author.id}`)
-		}
-		
 		if (message.content === realprefix) {
-			let commandName = require("./commands/command/basic.js")
+			let commandName = require("./commands/chatting/basic.js")
 			return commandName.run(client, message, args)
 		}
 

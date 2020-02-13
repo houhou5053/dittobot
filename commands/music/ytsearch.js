@@ -2,8 +2,8 @@ const search = require("yt-search")
 const Discord = require("discord.js")
 
 module.exports = {
-    name: "유튜브검색",
-    aliases: ["youtubesearch"],
+    name: "ytsearch",
+    aliases: ["youtubesearch", "유튜브검색"],
     run: async (client, message, args) => {
         if (!args[0]) return message.channel.send('검색할 내용을 입력해 주세요!')
         

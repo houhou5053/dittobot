@@ -3,8 +3,9 @@ const cheerio = require("cheerio")
 const request = require("request")
 
 module.exports = {
-    name: "코로나",
-    aliases: ["코로나바이러스", "코로나현황", "코로나 현황", "코로나 바이러스"],
+    name: "corona",
+    aliases: ["코로나", "코로나바이러스", "코로나현황", "코로나 현황", "신종코로나바이러스"],
+    category: 'crawling',
     run: async (client, message, args, ops) => {
         var url = 'http://ncov.mohw.go.kr/index_main.jsp'
         var url2 = 'https://services1.arcgis.com/0MSEUqKaxRlEPj5g/arcgis/rest/services/ncov_cases/FeatureServer/1/query?f=json&where=1%3D1&returnGeometry=false&spatialRel=esriSpatialRelIntersects&outFields=*&outStatistics=%5B%7B%22statisticType%22%3A%22sum%22%2C%22onStatisticField%22%3A%22Confirmed%22%2C%22outStatisticFieldName%22%3A%22value%22%7D%5D&cacheHint=true'

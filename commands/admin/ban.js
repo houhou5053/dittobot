@@ -3,8 +3,8 @@ const { stripIndents } = require("common-tags");
 const { promptMessage } = require("../../functions.js");
 
 module.exports = {
-    name: "차단",
-    aliases: ["ban"],
+    name: "ban",
+    aliases: ["차단", "밴", "qos", "ckeks", "ㅠ무"],
     usage: "[id, | mention]",
     run: async (client, message, args) => {
         const logChannel = message.channel;
