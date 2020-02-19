@@ -37,7 +37,7 @@ module.exports = {
         const noticeembed = new Discord.RichEmbed()
             .setTimestamp()
             .setTitle(`📢 디토봇 공지사항`)
-            .setDescription(`${Description}`)
+            .setDescription(`${Description}\n[:link: 봇 개발자들의 소통방](https://discord.gg/JvHBVjF)`)
             .setColor(0xffff00)
             .setFooter(`${message.author.username} • 제작자`, message.author.displayAvatarURL)
             .setThumbnail(client.user.displayAvatarURL)

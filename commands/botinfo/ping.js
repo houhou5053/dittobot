@@ -10,7 +10,7 @@ module.exports = {
             .setFooter(message.author.username, message.author.displayAvatarURL)
             .setTimestamp()
             .setTitle(`🏓 **Pong!**`)
-            .setDescription(`Latency: **${Math.floor(msg.createdAt - message.createdAt)}ms (${Math.floor(msg.createdAt - message.createdAt) / 1000}초)**\nAPI Latency: **${Math.round(client.ping)}ms** **(${Math.round(client.ping) / 1000}초)**`)
+            .setDescription(`Latency: **${Math.floor(msg.createdAt - message.createdAt)}ms (${Math.floor(msg.createdAt - message.createdAt) / 1000}s)**\nAPI Latency: **${Math.round(client.ping)}ms** **(${Math.round(client.ping) / 1000}s)**`)
         msg.edit(embed);
     }
 }

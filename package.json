@@ -2,17 +2,14 @@
   "name": "dittobot",
   "version": "1.0.0",
   "description": "discord bot",
-  "main": ".",
+  "main": "index.js",
   "scripts": {
     "start": "node index.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "x"
   },
   "keywords": [
     "dittobot"
   ],
   "author": "ditto7890",
-  "license": "UNLICENSED"
+  "license": "UNLICENSED",
+  "devDependencies": {}
 }

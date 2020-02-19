@@ -30,11 +30,11 @@ module.exports = {
 
             if (member.user.presence.status !== "offline" && member.user.bot === false) {
                 if (member.user.presence.clientStatus.desktop) {
-                    embed.addField(`${client.emojis.find(x => x.name == "discord_logo")} 클라이언트`, `**🖥 데스크탑**`)
+                    embed.addField(`${client.emojis.find(x => x.name == "discord_logo")} 디스코드 클라이언트`, `**🖥 디스코드 앱**`)
                 } else if (member.user.presence.clientStatus.web) {
-                    embed.addField(`${client.emojis.find(x => x.name == "discord_logo")} 클라이언트`, `**⌨ 웹**`)
+                    embed.addField(`${client.emojis.find(x => x.name == "discord_logo")} 디스코드 클라이언트`, `**⌨ 웹**`)
                 } else if (member.user.presence.clientStatus.mobile) {
-                    embed.addField(`${client.emojis.find(x => x.name == "discord_logo")} 클라이언트`, `**📱 모바일**`)
+                    embed.addField(`${client.emojis.find(x => x.name == "discord_logo")} 디스코드 클라이언트`, `**📱 모바일**`)
                 }
             }
 

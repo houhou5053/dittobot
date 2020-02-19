@@ -4,7 +4,7 @@ const request = require("request")
 
 module.exports = {
     name: "corona",
-    aliases: ["코로나", "코로나바이러스", "코로나현황", "코로나 현황", "신종코로나바이러스"],
+    aliases: ["코로나", "코로나바이러스", "코로나현황", "코로나 현황", "신종코로나바이러스", "코로나19"],
     category: 'crawling',
     run: async (client, message, args, ops) => {
         var url = 'http://ncov.mohw.go.kr/index_main.jsp'
@@ -15,9 +15,10 @@ module.exports = {
         var coronavirus_national = new Array()
 
         const embed = new Discord.RichEmbed()
-            .setTitle('신종 코로나바이러스 감염증 현황')
+            .setTitle('코로나 19 현황')
             .setColor(0xffff00)
             .setTimestamp()
+            .setFooter(message.author.username, message.author.displayAvatarURL)
 
         request(url, function(error, ghkrwls, html) {
             if (!error) {
@@ -46,8 +47,7 @@ module.exports = {
                                     if (!error) {
                                         var f = JSON.parse(html, null, 1).features[0].attributes.value
 
-                                        embed.setDescription(`**국내**\n확진: **${a}**\n퇴원: **${b}**\n검사 진행: **${c}**\n\n**전세계**\n감염자: **${d}명**\n사망자: **${e}명**\n완치: **${f}명**`)
-                                        embed.addField('참고', `[질병관리본부](http://ncov.mohw.go.kr/index_main.jsp)\n[존스홉킨스대학](https://gisanddata.maps.arcgis.com/apps/opsdashboard/index.html#/bda7594740fd40299423467b48e9ecf6)`)
+                                        embed.setDescription(`**국내**\n확진: **${a}**\n퇴원: **${b}**\n검사 진행: **${c}**\n\n**전세계**\n감염자: **${d}명**\n사망자: **${e}명**\n완치: **${f}명**\n\n**참고**\n[질병관리본부](http://ncov.mohw.go.kr/index_main.jsp)\n[존스홉킨스대학](https://gisanddata.maps.arcgis.com/apps/opsdashboard/index.html#/bda7594740fd40299423467b48e9ecf6)`)
 
                                         message.channel.send(embed)
                                     }

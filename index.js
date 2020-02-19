@@ -11,7 +11,7 @@ client.aliases = new Discord.Collection();
 
 config({ path: __dirname + "/.env" });
 
-["command"].forEach(handler => {require(`./handler/${handler}`) (client)});
+command_setup(client.commands, client.aliases)
 
 client.once("ready", () => {
 	console.log(`Login ${client.user.username}\n----------------------------`)
@@ -31,8 +31,8 @@ process.on('unhandledRejection', error => console.error('Unhandled promise rejec
 client.on("message", async message => {
 	if (message.author.bot) return;
 	if (message.channel.type === "dm") return;
-
-	if (message.author.id !== ownerID) console.log(`${message.author.username}: ${message.content} | ${message.guild.name} | ${message.author.id}`)
+	
+	if (message.author.id !== ownerID) console.log(`${message.author.username}: ${message.content} | ${message.guild.name} (ID: ${message.guild.id}) (CHANNEL: ${message.channel.name}, ID: ${message.channel.id}) | ${message.author.id}`)
 
 	const args = message.content.substring(prefix.length).split(" ")
 
@@ -72,3 +72,46 @@ client.on("message", async message => {
 });
 
 client.login(process.env.TOKEN);
+
+class BOT {
+	constructor () {
+		this.client = new Discord.Client({disableEveryone: true})
+	}
+
+	setup () {
+		this.client.login(process.env.TOKEN)
+
+		this.client.on('ready', () => {
+            console.log(`${this.client.user.username} is Online!`);
+
+            this.client.user.setActivity('Test', {type: "PLAYING"});
+        });
+	}
+}
+
+async function command_setup (a, b) {
+	const fs = require("fs");
+	const ascii = require("ascii-table");
+	const table = new ascii().setHeading("Command", "Load status");
+
+    fs.readdirSync("./commands/").forEach(dir => {
+        const commands = fs.readdirSync(`./commands/${dir}`).filter(f => f.endsWith(".js"));
+
+        for (let file of commands) {
+            let pull = require(`./commands/${dir}/${file}`);
+
+            if (pull.name) {
+                a.set(pull.name, pull);
+                table.addRow(file, '✅');
+            } else {
+                table.addRow(file, '❌ -> Error');
+                continue;
+            }
+
+            if (pull.aliases && Array.isArray(pull.aliases))
+                pull.aliases.forEach(alias => b.set(alias, pull.name));
+        }
+    });
+
+    console.log(table.toString());
+}

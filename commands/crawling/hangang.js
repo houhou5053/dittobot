@@ -11,7 +11,6 @@ module.exports = {
         request(url, function(error, dd, html) {
             if (!error) {
                 const embed = new Discord.RichEmbed()
-                    .setThumbnail('https://postfiles.pstatic.net/20140326_75/vartist_1395844965258bOTJj_JPEG/R1024_140326_%C7%D1%B0%AD%BE%DF%B0%E6_11T.JPG?type=w3')
                     .setTitle('한강')
                     .setColor(0x00ffff)
                     .setTimestamp()
