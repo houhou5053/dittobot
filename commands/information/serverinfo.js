@@ -11,6 +11,7 @@ module.exports = {
             .setColor(0xffff00)
             .setThumbnail(message.guild.iconURL)
             .setFooter(message.guild.name, message.guild.iconURL)
+            .setTimestamp()
             .addField('👑 서버 주인', `**${message.guild.owner.user.username}\n(ID: ${message.guild.ownerID})**`)
 
         if (message.guild.region === "south-korea") {
@@ -50,6 +51,7 @@ module.exports = {
 
         embed.addField('🎂 서버 생일', `**${created}**`)
         embed.addField('💬 채팅 채널', `**ALL: ${message.guild.channels.size} (CHANNEL: ${message.guild.channels.filter(channel => channel.parent).size} | CATEGORY: ${message.guild.channels.size - message.guild.channels.filter(channel => channel.parent).size})**`)
+
         if (message.guild.afkChannel === null) {
             embed.addField('💤 잠수 채널', `**없음**`)
         } else {
@@ -107,29 +109,34 @@ module.exports = {
 
         const role = message.guild.roles.filter(r => r.id !== message.guild.id).map(r => r).join(", ") || "없음";
 
-        const embed2 = new Discord.RichEmbed()
-            .setColor(0xffff00)
-            .setTitle(`${message.guild.name} 서버의 역할 (${message.guild.roles.size - 1}개)`)
-            .setDescription(`**${role}**`);
-
         const embed3 = new Discord.RichEmbed()
             .setColor(0xffff00)
-            embed3.setTitle(`${message.guild.name} 서버의 이모지 (${message.guild.emojis.size}개)`)
+            .setTitle(`${message.guild.name} 서버의 역할 (${message.guild.roles.size - 1}개)`)
 
-        if (message.guild.emojis.size === 0) {
-            embed3.setDescription(`**없음**`)
+        if (role.length >= 1950) {
+            embed3.setDescription(`**${role.substr(0, 1900)}**...`);
         } else {
-            embed3.setDescription(`**${message.guild.emojis.map(e => e.toString()).join(" ")}**`)
+            embed3.setDescription(`**${role}**`)
         }
 
-        message.channel.send(embed);
+        const embed4 = new Discord.RichEmbed()
+            .setColor(0xffff00)
+            .setTitle(`${message.guild.name} 서버의 이모지 (${message.guild.emojis.size}개)`)
+
+        if (message.guild.emojis.size === 0) {
+            embed4.setDescription(`**없음**`)
+        } else {
+            embed4.setDescription(`**${message.guild.emojis.map(e => e.toString()).join(" ")}**`)
+        }
+
+        message.channel.send(embed)
         
         if (message.member.hasPermission("MANAGE_ROLES") && message.guild.me.hasPermission("MANAGE_ROLES")) {
-            message.channel.send(embed2)
+            message.channel.send(embed3)
         }
 
         if (message.member.hasPermission("MANAGE_EMOJIS") && message.guild.me.hasPermission("MANAGE_EMOJIS")) {
-            message.channel.send(embed3);
+            message.channel.send(embed4);
         }
     }
 }

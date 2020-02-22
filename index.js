@@ -11,7 +11,9 @@ client.aliases = new Discord.Collection();
 
 config({ path: __dirname + "/.env" });
 
-command_setup(client.commands, client.aliases)
+command_setup()
+
+client.login(process.env.TOKEN);
 
 client.once("ready", () => {
 	console.log(`Login ${client.user.username}\n----------------------------`)
@@ -38,8 +40,14 @@ client.on("message", async message => {
 
 	if (message.content.startsWith(realprefix)) {
 		if (message.content === realprefix) {
-			let commandName = require("./commands/chatting/basic.js")
-			return commandName.run(client, message, args)
+			var random = Math.floor(Math.random() * 3) + 1;
+			if (random === 1) {
+				return message.reply('\`디토야 도움\`');
+			} else if (random === 2) {
+				return message.reply('왜요?');
+			} else if (random === 3) {
+				return message.channel.send(`<@${message.author.id}> 네?`);
+			}
 		}
 
 		if (message.content.startsWith(realprefix)) {
@@ -64,32 +72,65 @@ client.on("message", async message => {
 	
 				if (command2)
 					command2.run(client, message, args, ops);
+
+				else chatbot(cmd)
 			} catch (e) {
 				console.log(e.stack)
 			}
 		}
 	}
+
+	function chatbot (args) {
+		const request = require('request');
+	
+		const headers = {
+			'Authorization': `Basic ${process.env.Authorization}`,
+			'Content-Type': 'application/json'
+		};
+	
+		const dataString = {
+			request: {
+				query: args
+			}
+		}
+	
+		const options = {
+			url: process.env.pingpong_url,
+			method: 'POST',
+			headers: headers,
+			body: JSON.stringify(dataString)
+		};
+	
+		request(options, callback);
+	}
+
+	async function callback(error, response, body) {
+		if (!error && response.statusCode == 200) {
+			let msg = JSON.parse(body, null, 1).response.replies[0].text
+
+			if (msg.includes("\\edit")) {
+				const e = await message.channel.send(msg.substr(0, msg.indexOf("\\edit")))
+				return e.edit(msg.substr(Math.floor(msg.indexOf("\\edit") + "\\edit".length), msg.length))
+			}
+
+			message.channel.send(msg.replace(/\\n/gi, '\n').replace(/\${message.author.username}/gi, `${message.author.username}`).replace(/\${getStatus}/gi, getStatus()))
+		}
+	}
+
+	function getStatus() {
+		if (message.author.presence.game) {
+            if (message.author.presence.game.name === "Custom Status") {
+                return `${message.author.username}님은 현재 ${message.author.presence.game.state}을(를) 하고 계시네요!`
+            } else {
+                return `${message.author.username}님은 현재 ${message.author.presence.game.name}을(를) 하고 계시네요!`
+            }
+        } else {
+            return "모르겠어요!"
+        }
+	}
 });
 
-client.login(process.env.TOKEN);
-
-class BOT {
-	constructor () {
-		this.client = new Discord.Client({disableEveryone: true})
-	}
-
-	setup () {
-		this.client.login(process.env.TOKEN)
-
-		this.client.on('ready', () => {
-            console.log(`${this.client.user.username} is Online!`);
-
-            this.client.user.setActivity('Test', {type: "PLAYING"});
-        });
-	}
-}
-
-async function command_setup (a, b) {
+function command_setup () {
 	const fs = require("fs");
 	const ascii = require("ascii-table");
 	const table = new ascii().setHeading("Command", "Load status");
@@ -101,7 +142,7 @@ async function command_setup (a, b) {
             let pull = require(`./commands/${dir}/${file}`);
 
             if (pull.name) {
-                a.set(pull.name, pull);
+                client.commands.set(pull.name, pull);
                 table.addRow(file, '✅');
             } else {
                 table.addRow(file, '❌ -> Error');
@@ -109,7 +150,7 @@ async function command_setup (a, b) {
             }
 
             if (pull.aliases && Array.isArray(pull.aliases))
-                pull.aliases.forEach(alias => b.set(alias, pull.name));
+                pull.aliases.forEach(alias => client.aliases.set(alias, pull.name));
         }
     });
 

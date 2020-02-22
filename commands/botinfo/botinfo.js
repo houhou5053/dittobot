@@ -29,7 +29,7 @@ module.exports = {
             > API 지연 시간: **${Math.round(client.ping)}ms (${Math.round(client.ping) / 1000}초)**
 
             > 개발 언어: **Javascript** ${client.emojis.find(x => x.name == "javascript")}
-            > ${client.emojis.find(x => x.name == "js")} Node.js 버전: **v13.5.0**
+            > ${client.emojis.find(x => x.name == "nodejs")} Node.js 버전: **v13.5.0**
             > ${client.emojis.find(x => x.name == "discord_logo")} Discord.js 버전: **v11.5.1**`)
 
         m.edit(embed)
