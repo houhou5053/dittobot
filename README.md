@@ -1,6 +1,7 @@
 # DittoBot (디토봇)
 
 This is a Discord bot that started developing on **December 21, 2019**.
+
 **2019년 12월 21일**부터 개발하기 시작한 디스코드 봇입니다.
 
 # Bot Invite (봇 초대)
