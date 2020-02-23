@@ -7,13 +7,13 @@ module.exports = {
     run: async (client, message, args) => {
         //message.channel.send(JSON.stringify(api))
 
-        var url = 'http://localhost:5632/api'
+        /*var url = 'https://dittobot.ga/'
 
         request(url, function(error, dd, html) {
             if (!error) {
                 message.channel.send(`\`\`\`json\n${html}\n\`\`\``)
                 message.channel.send(new Discord.RichEmbed().setTitle(`${JSON.parse(html, null, 1).client.username} 정보`))
             }
-        })
+        })*/
     }
 }

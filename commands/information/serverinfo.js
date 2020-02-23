@@ -4,7 +4,7 @@ moment.locale('ko-KR');
 
 module.exports = {
     name: "serverinfo",
-    aliases: ["서버정보", "정보서버", "정보 서버", "서정", "server-info"],
+    aliases: ["서버정보", "정보서버", "정보 서버", "서정", "server-info", "서버 정보"],
     run: async (client, message, args) => {
         const embed = new Discord.RichEmbed()
             .setTitle(`${message.guild.name} 서버의 정보`)
@@ -50,7 +50,7 @@ module.exports = {
         const created = moment(message.guild.createdAt).format('YYYY년 MM월 DD일 dddd HH시 mm분');
 
         embed.addField('🎂 서버 생일', `**${created}**`)
-        embed.addField('💬 채팅 채널', `**ALL: ${message.guild.channels.size} (CHANNEL: ${message.guild.channels.filter(channel => channel.parent).size} | CATEGORY: ${message.guild.channels.size - message.guild.channels.filter(channel => channel.parent).size})**`)
+        embed.addField('💬 채팅 채널', `**ALL: ${message.guild.channels.size} (CHANNEL: ${message.guild.channels.filter(x => x.type === "text").size} | CATEGORY: ${message.guild.channels.filter(x => x.type === "category").size} | VOICE CHANNEL: ${message.guild.channels.filter(x => x.type === "voice").size})**`)
 
         if (message.guild.afkChannel === null) {
             embed.addField('💤 잠수 채널', `**없음**`)
@@ -90,7 +90,7 @@ module.exports = {
         if (message.guild.systemChannel === null) {
             embed.addField('📡 시스템 메세지 채널', `**없음**`)
         } else {
-            embed.addField('📡 시스템 메세지 채널', `**${message.guild.systemChannel.name}**`)
+            embed.addField('📡 시스템 메세지 채널', `**${message.guild.systemChannel}**`)
         }
 
         if (message.guild.explicitContentFilter === 2) {

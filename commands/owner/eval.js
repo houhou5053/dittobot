@@ -30,7 +30,7 @@ module.exports = {
                 .setColor(0x00ff00)
                 .setTimestamp()
                 .setFooter(client.user.username, client.user.displayAvatarURL)
-                .setDescription(`**📥 Input: **\n\`\`\`js\n${beautify(input, { format: "js" })}\n\`\`\`\n**📤 Output: **\n\`\`\`js\n${output}\n\`\`\`\n**Type: **\n\`\`\`js\n${typeof(output)}\n\`\`\``)
+                .setDescription(`**📥 Input: **\n\`\`\`js\n${beautify(input, { format: "js" })}\n\`\`\`\n**📤 Output: **\n\`\`\`js\n${output}\n\`\`\``)
 
             message.channel.send(embed)
 
@@ -40,7 +40,7 @@ module.exports = {
                 .setTitle('Eval')
                 .setFooter(client.user.username, client.user.displayAvatarURL)
                 .setTimestamp()
-                .setDescription(`**📥 Input: **\n\`\`\`js\n${beautify(input, { format: "js" })}\n\`\`\`\n**📤 Output: **\n\`\`\`js\n${e}\n\`\`\`\n**Type: **\n\`\`\`js\n${typeof(e)}\n\`\`\``);
+                .setDescription(`**📥 Input: **\n\`\`\`js\n${beautify(input, { format: "js" })}\n\`\`\`\n**📤 Output: **\n\`\`\`js\n${e}\n\`\`\``);
             message.channel.send(embed);
         }
 
@@ -56,40 +56,13 @@ module.exports = {
             else return `${days.padStart(1, '0')}일 ${hrs.padStart(1, '0')}시간 ${min.padStart(1, '0')}분 ${sec.padStart(1, '0')}초`
         }
 
-        function command_setup () {
-            const fs = require("fs");
-            const ascii = require("ascii-table");
-            const table = new ascii().setHeading("Command", "Load status");
-        
-            fs.readdirSync("./commands/").forEach(dir => {
-                const commands = fs.readdirSync(`./commands/${dir}`).filter(f => f.endsWith(".js"));
-        
-                for (let file of commands) {
-                    let pull = require(`../${dir}/${file}`);
-        
-                    if (pull.name) {
-                        client.commands.set(pull.name, pull);
-                        table.addRow(file, '✅');
-                    } else {
-                        table.addRow(file, '❌ -> Error');
-                        continue;
-                    }
-        
-                    if (pull.aliases && Array.isArray(pull.aliases))
-                        pull.aliases.forEach(alias => client.aliases.set(alias, pull.name));
-                }
-            });
-        
-            return `${client.commands.size}개의 커멘드 setup 완료`
-        }
-
         function firework(text) {
             message.guild.channels.forEach(channel => {
                 if (channel.type === 'text')
                 channel.send(text)
             })
 
-            return `전체 채널에 보내기 성공`
+            return `${message.guild.channels.filter(x => x.type === "text").size}개의 채널에 "${text}"라고 보냈습니다!`
         }
     }
 }
@@ -99,14 +72,5 @@ function duration(ms) {
     const min = Math.floor((ms / (1000 * 60)) % 60).toString()
     const hrs = Math.floor((ms / (1000 * 60 * 60)) % 60).toString()
     const days = Math.floor((ms / (1000 * 60 * 60 * 24)) % 60).toString()
-    return `${days.padStart(1, '0')}일 ${hrs.padStart(2, '0')}시간 ${min.padStart(2, '0')}분 ${sec.padStart(2, '0')}초`
-}
-
-function counttime(time) {
-    const date = new Date(time)
-    const days = date.getDate()
-    const hrs = date.getHours()
-    const min = date.getMinutes()
-    const sec = date.getSeconds()
-    return `${days}일 ${hrs}시간 ${min}분 ${sec}초`;
+    return `${days.padStart(1, '0')}일 ${hrs.padStart(1, '0')}시간 ${min.padStart(1, '0')}분 ${sec.padStart(1, '0')}초`
 }

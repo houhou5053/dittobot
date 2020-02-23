@@ -1,6 +1,7 @@
 const Discord = require('discord.js');
 const { config } = require("dotenv");
 const client = new Discord.Client({ disableEveryone: true });
+this.client = client
 const prefix = '디토야 '
 const realprefix = '디토야';
 const ownerID = '604617640891121664';
@@ -11,7 +12,30 @@ client.aliases = new Discord.Collection();
 
 config({ path: __dirname + "/.env" });
 
-command_setup()
+const fs = require("fs");
+const ascii = require("ascii-table");
+const table = new ascii().setHeading("Command", "Load status");
+
+fs.readdirSync("./commands/").forEach(dir => {
+	const commands = fs.readdirSync(`./commands/${dir}`).filter(f => f.endsWith(".js"));
+
+	for (let file of commands) {
+		let pull = require(`./commands/${dir}/${file}`);
+
+		if (pull.name) {
+			client.commands.set(pull.name, pull);
+			table.addRow(file, '✅');
+		} else {
+			table.addRow(file, '❌ -> Error');
+			continue;
+		}
+
+		if (pull.aliases && Array.isArray(pull.aliases))
+			pull.aliases.forEach(alias => client.aliases.set(alias, pull.name));
+	}
+});
+
+console.log(table.toString());
 
 client.login(process.env.TOKEN);
 
@@ -26,9 +50,10 @@ client.once("ready", () => {
 	}, 10000)
 });
 
-client.on('error', error => console.error('websocket 연결에 오류가 발생:', error));
-client.on('warn', warn => console.warn('경고:', warn));
-process.on('unhandledRejection', error => console.error('Unhandled promise rejection:', error));
+client.on('error', err => console.error('websocket 연결에 오류가 발생:', err));
+client.on('warn', warn => console.warn('warn:', warn));
+process.on('unhandledRejection', err => console.error('Unhandled promise rejection:', err));
+process.on("uncaughtException", err => console.error(err.stack || err))
 
 client.on("message", async message => {
 	if (message.author.bot) return;
@@ -37,46 +62,32 @@ client.on("message", async message => {
 	if (message.author.id !== ownerID) console.log(`${message.author.username}: ${message.content} | ${message.guild.name} (ID: ${message.guild.id}) (CHANNEL: ${message.channel.name}, ID: ${message.channel.id}) | ${message.author.id}`)
 
 	const args = message.content.substring(prefix.length).split(" ")
+	const args2 = args.shift().toLowerCase()
+	const args3 = args.slice(0).join(" ").replace(/\,/gi, ' ')
+	const cmd = `${args2} ${args3}`
+
+	if (message.content === realprefix) {
+		const random = [ `네!`, `네?`, `왜 불러요?`, `왜 부르시나요?`, `네` ]
+		return message.channel.send(random[Math.floor(Math.random() * random.length)])
+	}
 
 	if (message.content.startsWith(realprefix)) {
-		if (message.content === realprefix) {
-			var random = Math.floor(Math.random() * 3) + 1;
-			if (random === 1) {
-				return message.reply('\`디토야 도움\`');
-			} else if (random === 2) {
-				return message.reply('왜요?');
-			} else if (random === 3) {
-				return message.channel.send(`<@${message.author.id}> 네?`);
-			}
-		}
+		let command = client.commands.get(cmd);
+		if (!command) command = client.commands.get(client.aliases.get(cmd))
+		let command2 = client.commands.get(args2)
+		if (!command2) command2 = client.commands.get(client.aliases.get(args2))
 
-		if (message.content.startsWith(realprefix)) {
-			const args2 = args.slice(1).join(" ")
-			const args3 = args.shift().toLowerCase()
-			const args4 = args2.replace( /\,/gi, ' ')
-			const cmd = `${args3} ${args4}`
-	
-			let command = client.commands.get(cmd);
-			let command2 = client.commands.get(args3);
-			if (!command) command = client.commands.get(client.aliases.get(cmd));
-			if (!command2) command2 = client.commands.get(client.aliases.get(args3))
-	
-			try {
-				let ops = {
-					ownerID: ownerID,
-					active: active
-				}
-	
-				if (command)
-					command.run(client, message, args, ops);
-	
-				if (command2)
-					command2.run(client, message, args, ops);
-
-				else chatbot(cmd)
-			} catch (e) {
-				console.log(e.stack)
+		try {
+			let ops = {
+				ownerID: ownerID,
+				active: active
 			}
+
+			if (command) command.run(client, message, args, ops)
+			else if (command2) command2.run(client, message, args, ops)
+			else chatbot(cmd)
+		} catch (e) {
+			console.log(e.stack || e)
 		}
 	}
 
@@ -111,9 +122,13 @@ client.on("message", async message => {
 			if (msg.includes("\\edit")) {
 				const e = await message.channel.send(msg.substr(0, msg.indexOf("\\edit")))
 				return e.edit(msg.substr(Math.floor(msg.indexOf("\\edit") + "\\edit".length), msg.length))
+			} else if (msg.includes("\\console")) {
+				console.log(msg.substr(Math.floor(msg.indexOf("\\console") + "\\console".length), msg.length).replace(/\${message.author.username}/gi, message.author.username).replace(/\${내용}/gi, cmd))
+				client.channels.get('681185303406444558').send(msg.substr(Math.floor(msg.indexOf("\\console") + "\\console".length), msg.length).replace(/\${message.author.username}/gi, message.author.username).replace(/\${내용}/gi, cmd))
+				return message.channel.send(msg.substr(0, Math.floor(msg.indexOf("\\console"))))
 			}
 
-			message.channel.send(msg.replace(/\\n/gi, '\n').replace(/\${message.author.username}/gi, `${message.author.username}`).replace(/\${getStatus}/gi, getStatus()))
+			message.channel.send(msg.replace(/\\n/gi, '\n').replace(/\${message.author.username}/gi, message.author.username).replace(/\${getStatus}/gi, getStatus()))
 		}
 	}
 
@@ -125,34 +140,7 @@ client.on("message", async message => {
                 return `${message.author.username}님은 현재 ${message.author.presence.game.name}을(를) 하고 계시네요!`
             }
         } else {
-            return "모르겠어요!"
+            return `지금 무엇을 하시는 지 모르겠어요!`
         }
 	}
 });
-
-function command_setup () {
-	const fs = require("fs");
-	const ascii = require("ascii-table");
-	const table = new ascii().setHeading("Command", "Load status");
-
-    fs.readdirSync("./commands/").forEach(dir => {
-        const commands = fs.readdirSync(`./commands/${dir}`).filter(f => f.endsWith(".js"));
-
-        for (let file of commands) {
-            let pull = require(`./commands/${dir}/${file}`);
-
-            if (pull.name) {
-                client.commands.set(pull.name, pull);
-                table.addRow(file, '✅');
-            } else {
-                table.addRow(file, '❌ -> Error');
-                continue;
-            }
-
-            if (pull.aliases && Array.isArray(pull.aliases))
-                pull.aliases.forEach(alias => client.aliases.set(alias, pull.name));
-        }
-    });
-
-    console.log(table.toString());
-}
